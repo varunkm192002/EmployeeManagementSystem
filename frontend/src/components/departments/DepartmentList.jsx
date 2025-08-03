@@ -8,6 +8,14 @@ import { useState } from 'react';
 const DepartmentList = () => {
     const [departments, setDepartments] = useState([])
     const [depLoading, setDepLoading] = useState(false)
+
+    const onDepartmentDelete = async (id) => {
+        const data = departments.filter(dep => dep._id !== id)
+        setDepartments(data)
+    }
+
+
+
     useEffect(() => {
         const fetchDepartments = async () => {
             setDepLoading(true)
@@ -26,7 +34,7 @@ const DepartmentList = () => {
                             dep_name: dep.dep_name,
                             //for action we need to two button 
                             //will create seperate component for that
-                            action: (<DepartmentButtons _id={dep._id} />
+                            action: (<DepartmentButtons Id={dep._id} onDepartmentDelete={onDepartmentDelete} />
 
                             )
                         }
